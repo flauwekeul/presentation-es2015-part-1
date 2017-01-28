@@ -1,0 +1,12 @@
+blockquote {
+    font-size: 75% !important;
+    text-align: left;
+}
+
+.cols {
+    display: flex;
+    flex-flow: row wrap;
+}
+.col {
+    flex: 0 0 50%;
+}

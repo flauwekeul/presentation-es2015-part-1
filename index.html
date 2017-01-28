@@ -4,10 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>reveal.js</title>
+        <title>ES2015: Syntax</title>
 
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/theme/simple.css">
+
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -26,6 +28,111 @@
             <div class="slides">
 
                 <section>
+                    <h1>ES2015: Syntax</h1>
+                    <small>Abbe Keultjes</small>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Overview</h2>
+                        <ol>
+                            <li class="fragment">
+                                <a href="#/const-and-let"><code>const</code> and <code>let</code></a>
+                            </li>
+                            <li class="fragment">Arrow functions</li>
+                            <li class="fragment">Destructuring</li>
+                            <li class="fragment">Spread/rest operator</li>
+                            <li class="fragment">Default function parameters</li>
+                            <li class="fragment">Template literals</li>
+                            <li class="fragment">Object literal extensions</li>
+                            <li class="fragment">Symbols</li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section id="const-and-let">
+                    <section>
+                        <h2><code>const</code> and <code>let</code></h2>
+                    </section>
+                    <section>
+                        <h3>Block scoped</h3>
+                        <pre><code data-trim class="js">
+                            {
+                                const one = 1
+                                let two = 2
+
+                                console.log(one, two) // 1, 2
+                            }
+
+                            console.log(one, two) // ⚠️ ReferenceError
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Access only after declaration</h3>
+                        <p>
+                            It's not possible to access a <code>const</code> or <code>let</code> until after declaration.
+                        </p>
+                        <pre class="fragment"><code data-trim class="js">
+                            console.log(a) // undefined
+                            console.log(b) // ⚠️ ReferenceError
+
+                            var a = 1
+                            let b = 2
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3><code>let</code> or <code>const</code></h3>
+                        <p>A <code>const</code> is read-only. Reassigning a value is not permitted.</p>
+                        <pre class="fragment"><code data-trim class="js">
+                            const a = 1
+                            console.log(a) // 1
+
+                            const a = 2 // ⚠️ TypeError
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3><code>const</code> does <em>not</em> mean immutable</h3>
+                        <pre class="fragment"><code data-trim class="js">
+                            const a = [1, 2, 3]
+                            a.push(4)
+
+                            console.log(a) // [1, 2, 3, 4]
+                        </code></pre>
+                        <p class="fragment">If the value is complex (e.g. arrays, objects), their contents can be modified.</p>
+                    </section>
+                    <section>
+                        <h3><code>const</code>s must be initialized</h3>
+                        <p class="fragment" data-fragment-index="1">When declaring a <code>const</code>:</p>
+                        <pre class="fragment" data-fragment-index="1"><code data-trim data-noescape class="js">
+                            let a<span class="fragment" data-fragment-index="2"> // 👍🏼</span>
+                            const b<span class="fragment" data-fragment-index="2"> // ⚠️ SyntaxError</span>
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="2">&hellip;it must be initialized too.</p>
+                    </section>
+                    <section>
+                        <h3>So&hellip; <code>const</code> or <code>let</code>?</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <blockquote class="fragment" cite="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch2.md#const-or-not">
+                                    <p>&hellip;to avoid potentially confusing code, only use <code>const</code> for variables that you’re intentionally and obviously signaling will not change&hellip;</p>
+                                    <small><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch2.md#const-or-not">Kyle Simpsons</a></small>
+                                </blockquote>
+                            </div>
+                            <div class="col">
+                                <blockquote class="fragment">
+                                    <p>Use <code>const</code> by default. Only use <code>let</code> when the value needs to be (re)assigned later.</p>
+                                    <small>Abbe Keultjes</small><br>
+                                    <small class="fragment"><a href="https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75">Eric Elliot</a></small><br>
+                                    <small class="fragment"><a href="http://softwareengineering.stackexchange.com/a/278653">stackexchange.com</a></small><br>
+                                    <small class="fragment"><a href="https://google.github.io/styleguide/jsguide.html#features-use-const-and-let">Google JavaScript Style Guide</a></small>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>But everyone seems to agree:</h3>
+                        <p class="fragment">There's no reason to use <code>var</code> anymore 🙃</p>
+                    </section>
                 </section>
 
             </div>
