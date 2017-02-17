@@ -39,7 +39,9 @@
                             <li class="fragment">
                                 <a href="#/const-and-let"><code>const</code> and <code>let</code></a>
                             </li>
-                            <li class="fragment">Arrow functions</li>
+                            <li class="fragment">
+                                <a href="#/arrow-functions">Arrow functions</a>
+                            </li>
                             <li class="fragment">Destructuring</li>
                             <li class="fragment">Spread/rest operator</li>
                             <li class="fragment">Default function parameters</li>
@@ -132,6 +134,172 @@
                     <section>
                         <h3>But everyone seems to agree:</h3>
                         <p class="fragment">There's no reason to use <code>var</code> anymore 🙃</p>
+                    </section>
+                </section>
+
+                <section id="arrow-functions">
+                    <section>
+                        <h2>Arrow functions</h2>
+                    </section>
+                    <section>
+                        <h3>Comparison</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            // function <em>expression</em>
+                            const foo = function (x, y) {
+                                return x + y
+                            }
+
+                            // arrow function
+                            const foo = (x, y) => x + y
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="1">Arrow function declarations don't exist:</p>
+                        <pre class="fragment" data-fragment-index="1"><code data-trim data-noescape class="js">
+                            // function <em>declaration</em>
+                            function foo(x, y) {
+                                return x + y
+                            }
+
+                            // no arrow function declaration equivalent
+                        </code></pre>
+                        <aside class="notes">
+                            Function declarations are like variable declarations (<code>var a = 1</code>) and are hoisted so they're available in their scope.
+                        </aside>
+                    </section>
+                    <section>
+                        <h3><code>( )</code> are optional for a single argument</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            // no arguments
+                            ()<span class="diminish"> => 42</span>
+
+                            // 1 argument with optional ( )
+                            a<span class="diminish"> => a + 1</span>
+                            (a)<span class="diminish"> => a + 1</span>
+
+                            // more than 1 argument
+                            (a, b)<span class="diminish"> => a * b</span>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3><code>{ }</code> are optional for single expressions</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            // single expression
+                            <span class="diminish">(a, b) =></span> a * b
+
+                            // multiple expressions
+                            <span class="diminish">(a, b) =></span> {
+                                a * 2
+                                b * 3
+                                return a * b
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Omiting the <code>{ }</code> implicitly returns</h3>
+                        <pre><code data-trim class="js">
+                            const multiply = (a, b) => a * b
+
+                            // calling the function returns its result:
+                            const result = multiply(3, 4)
+                            console.log(result) // 12
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3><code>this</code> binding</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <pre><code data-trim class="js">
+                                    function Thing() {
+                                        this.counter = 0
+
+                                        // regular function
+                                        setInterval(function() {
+                                            this.counter++
+                                        }, 1000)
+                                    }
+
+                                    const thing = new Thing()
+
+                                    // wait a few seconds
+                                    console.log(thing.counter) // 0
+                                </code></pre>
+                            </div>
+                            <div class="col fragment">
+                                <pre><code data-trim class="js">
+                                    function Thing() {
+                                        this.counter = 0
+
+                                        // arrow function
+                                        setInterval(() => {
+                                            this.counter++
+                                        }, 1000)
+                                    }
+
+                                    const thing = new Thing()
+
+                                    // wait a few seconds
+                                    console.log(thing.counter) // 3
+                                </code></pre>
+                            </div>
+                        </div>
+                        <p class="fragment">
+                            Arrow functions don't create a new <code>this</code> binding.
+                            The binding of <code>this</code> is not dynamic, but <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping">lexical</a>.
+                        </p>
+                    </section>
+                    <section>
+                        <h3><code>this</code> binding caveat</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <pre><code data-trim class="js">
+                                    // using regular functions
+                                    const someObject = {
+                                        aMethod: function() {
+                                            this.anotherMethod()
+                                        },
+
+                                        anotherMethod: function() {
+                                            console.log('w00p')
+                                        }
+                                    }
+
+                                    someObject.aMethod()
+                                    // 'w00p'
+                                </code></pre>
+                            </div>
+                            <div class="col fragment">
+                                <pre><code data-trim class="js">
+                                    // using arrow functions
+                                    const someObject = {
+                                        aMethod: () => {
+                                            this.anotherMethod()
+                                        },
+
+                                        anotherMethod: () => {
+                                            console.log('w00p')
+                                        }
+                                    }
+
+                                    someObject.aMethod()
+                                    // ⚠️ TypeError
+                                </code></pre>
+                                <p class="fragment">
+                                    Here, <code>this</code> is lexically bound and points to the global scope.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>When to use arrow functions?</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <p class="fragment" data-fragment-index="1">Kyle Simpson answers this with a "handy" <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/fig1.png">flow chart</a>:</p>
+                                <p class="fragment" data-fragment-index="3">My advice: only use arrow functions when you <strong>require a single or a few expressions</strong>.</p>
+                                <p class="fragment" data-fragment-index="4">In all other cases there's nothing wrong with a good ol' <code>function</code>.</p>
+                            </div>
+                            <div class="col">
+                                <a class="fragment" data-fragment-index="2" href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/fig1.png?raw=true"><img src="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/fig1.png?raw=true" width="90%"></a>
+                            </div>
+                        </div>
                     </section>
                 </section>
 
