@@ -463,6 +463,36 @@
                     <section>
                         <h2>Template literals</h2>
                     </section>
+                    <section>
+                        <h3>String interpolation</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            // the old way:
+                            let name = 'Hank'
+                            let greeting = 'Hello ' + name + '!'
+                            console.log(greeting) // 'Hello Hank!'
+                            <span class="fragment">
+                            // with template literals:
+                            name = 'Trudy'
+                            greeting = `Hello ${name}!`
+                            console.log(greeting) // 'Hello Trudy!'
+                            </span>
+                        </code></pre>
+                        <p class="fragment">Template literals are strings delimited with backticks (<code>`</code>) that can be interpolated with expressions that start with <code>${</code> and end with <code>}</code>.</p>
+                    </section>
+                    <section>
+                        <h3>Tagged template literals</h3>
+                        <pre><code data-trim class="js">
+                            function tagMe(strings, ...values) {
+                                console.log(strings)
+                                console.log(values)
+                            }
+
+                            const what = 'magic'
+                            tagMe`Wow, it's like ${what}!`
+                            // ['Wow, it's like ', '!']
+                            // ['magic']
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section id="object-literal-extensions">
