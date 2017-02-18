@@ -384,6 +384,35 @@
                 <section id="spread-rest-operator">
                     <section>
                         <h2>Spread/rest operator</h2>
+                        <code class="js">...</code>
+                    </section>
+                    <section>
+                        <h3><em>Spread</em> an iterable into its individual values</h3>
+                        <pre><code data-trim class="js">
+                            function threeArgs(a, b, c) {
+                                console.log(a, b, c)
+                            }
+
+                            threeArgs([1, 2, 3]) // [1, 2, 3], undefined, undefined
+                            threeArgs(...[1, 2, 3]) // 1, 2, 3
+                        </code></pre>
+                        <pre class="fragment"><code data-trim class="js">
+                            // spread values from one array into another array
+                            const a = [2, 3, 4]
+                            const b = [1, ...a, 5]
+                            console.log(b) // [1, 2, 3, 4, 5]
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Or gather the <em>rest</em> of any arguments</h3>
+                        <pre><code data-trim class="js">
+                            function threeArgs(a, b, ...theRest) {
+                                console.log(a, b, theRest)
+                            }
+
+                            threeArgs(1, 2, 3, 4, 5) // 1, 2, [3, 4, 5]
+                        </code></pre>
+                        <p>&hellip;into an array.</p>
                     </section>
                 </section>
 
