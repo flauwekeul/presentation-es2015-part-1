@@ -36,18 +36,30 @@
                     <section>
                         <h2>Overview</h2>
                         <ol>
-                            <li class="fragment">
+                            <li>
                                 <a href="#/const-and-let"><code>const</code> and <code>let</code></a>
                             </li>
-                            <li class="fragment">
+                            <li>
                                 <a href="#/arrow-functions">Arrow functions</a>
                             </li>
-                            <li class="fragment">Destructuring</li>
-                            <li class="fragment">Spread/rest operator</li>
-                            <li class="fragment">Default function parameters</li>
-                            <li class="fragment">Template literals</li>
-                            <li class="fragment">Object literal extensions</li>
-                            <li class="fragment">Symbols</li>
+                            <li>
+                                <a href="#/destructuring">Destructuring</a>
+                            </li>
+                            <li>
+                                <a href="#/spread-rest-operator">Spread/rest operator</a>
+                            </li>
+                            <li>
+                                <a href="#/default-function-parameters">Default function parameters</a>
+                            </li>
+                            <li>
+                                <a href="#/template-literals">Template literals</a>
+                            </li>
+                            <li>
+                                <a href="#/object-literal-extensions">Object literal extensions</a>
+                            </li>
+                            <li>
+                                <a href="#/symbols">Symbols</a>
+                            </li>
                         </ol>
                     </section>
                 </section>
@@ -300,6 +312,105 @@
                                 <a class="fragment" data-fragment-index="2" href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/fig1.png?raw=true"><img src="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/fig1.png?raw=true" width="90%"></a>
                             </div>
                         </div>
+                    </section>
+                </section>
+
+                <section id="destructuring">
+                    <section>
+                        <h2>Destructuring</h2>
+                    </section>
+                    <section>
+                        <h3>Array destructuring</h3>
+                        <pre><code data-trim class="js">
+                            const anArray = [1, 2, 3]
+                            const [a, b, c] = anArray
+
+                            console.log(a, b, c) // 1, 2, 3
+                        </code></pre>
+                        <p class="fragment">Each array value is assigned to its own <code>const</code>, in order.</p>
+                    </section>
+                    <section>
+                        <h3>Object destructuring</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            const anObject = {
+                                a: 1,
+                                b: 2,
+                                c: 3
+                            }
+                            let { a: a, b: b, c: c } = anObject
+                                <span class="fragment" data-fragment-index="2">{ a, b, c } = anObject</span>
+
+                            console.log(a, b, c) // 1, 2, 3
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="1">When the property key has the same name as the variable that's assigned, the key can be left off.</p>
+                    </section>
+                    <section>
+                        <h3>Object destructuring direction</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            const anObject = {
+                                a:<span class="fragment" data-fragment-index="1">👈🏼</span>1,
+                                b:<span class="fragment" data-fragment-index="1">👈🏼</span>2,
+                                c:<span class="fragment" data-fragment-index="1">👈🏼</span>3
+                            }
+                            <span class="fragment" data-fragment-index="2">
+                            const { a:👉🏼x, b:👉🏼y, c:👉🏼z } = anObject
+                            <span class="fragment" data-fragment-index="3">
+                            console.log(x, y, z) // 1, 2, 3
+                            console.log(a, b, c) // ⚠️ ReferenceError
+                            </span></span>
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="1">Creating an object literal assigns values "right to left".</p>
+                        <p class="fragment" data-fragment-index="2">Object destructuring assigns values "left to right".</p>
+                    </section>
+                    <section>
+                        <h3>More examples</h3>
+                        <pre><code data-trim class="js">
+                            // assign values to things other than variables
+                            const o = {}
+                            [o.a, o.b, o.c] = [1, 2, 3]
+
+                            // repeated and nested assignment
+                            const { a: { x: X, x: Y }, a } = { a: { x: 1 } }
+                            console.log(X, Y, a) // 1, 1, { x: 1 }
+
+                            // skipped and ignored assignment
+                            const [ , , b] = [1, 2, 3]
+                            const { c, z: d, e } = { c: 4, d: 5 }
+                            console.log(b, c, d, e) // 3, 4, undefined, undefined
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section id="spread-rest-operator">
+                    <section>
+                        <h2>Spread/rest operator</h2>
+                    </section>
+                </section>
+
+                <section id="default-function-parameters">
+                    <section>
+                        <h2>Default function parameters</h2>
+                    </section>
+                    <section>
+                        <p>TODO: also with (nested) destructuring and the spread operator</p>
+                    </section>
+                </section>
+
+                <section id="template-literals">
+                    <section>
+                        <h2>Template literals</h2>
+                    </section>
+                </section>
+
+                <section id="object-literal-extensions">
+                    <section>
+                        <h2>Object literal extensions</h2>
+                    </section>
+                </section>
+
+                <section id="symbols">
+                    <section>
+                        <h2>Symbols</h2>
                     </section>
                 </section>
 
