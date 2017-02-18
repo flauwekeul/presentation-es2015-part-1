@@ -322,12 +322,11 @@
                     <section>
                         <h3>Array destructuring</h3>
                         <pre><code data-trim class="js">
-                            const anArray = [1, 2, 3]
-                            const [a, b, c] = anArray
+                            const [a, b, c] = [1, 2, 3]
 
                             console.log(a, b, c) // 1, 2, 3
                         </code></pre>
-                        <p class="fragment">Each array value is assigned to its own <code>const</code>, in order.</p>
+                        <p class="fragment">Each array value is assigned to its own variable, in order.</p>
                     </section>
                     <section>
                         <h3>Object destructuring</h3>
@@ -379,6 +378,14 @@
                             console.log(b, c, d, e) // 3, 4, undefined, undefined
                         </code></pre>
                     </section>
+                    <section>
+                        <h3>Default value assignment</h3>
+                        <pre><code data-trim class="js">
+                            // destructuring accepts defaults
+                            const { a = 1, b = 2, x: c = 3 } = { b: 4, x: 8 }
+                            console.log(a, b, c) // 1, 4, 8
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section id="spread-rest-operator">
@@ -421,7 +428,34 @@
                         <h2>Default function parameters</h2>
                     </section>
                     <section>
-                        <p>TODO: also with (nested) destructuring and the spread operator</p>
+                        <h3>An elaborate example</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            function add(a = 1, b = 2) {
+                                console.log(a + b)
+                            }
+                            <span class="fragment">
+                            add()               // 3
+                            add(4, 8)           // 12
+                            add(0, 4)           // 4
+                            </span><span class="fragment">
+                            add(16)             // 18
+                            add(16, undefined)  // 18
+                            add(16, null)       // 16 (null is coerced to 0)
+                            add('de', 'rp')     // 'derp'
+                            </span>
+                        </code></pre>
+                        <p class="fragment">Only <code>undefined</code> means a value is "missing".</p>
+                    </section>
+                    <section>
+                        <h3>Destructured default function object parameters 😳</h3>
+                        <pre class="fragment"><code data-trim data-noescape class="js">
+                            function hasDefaultOptions({ x = 1 } = {}, { y } = { y: 2 }) {
+                                console.log(x, y)
+                            }
+
+                            hasDefaultOptions()<span class="fragment"> // 1, 2</span>
+                            hasDefaultOptions({}, {})<span class="fragment"> // 1, undefined</span>
+                        </code></pre>
                     </section>
                 </section>
 
