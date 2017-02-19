@@ -391,7 +391,6 @@
                 <section id="spread-rest-operator">
                     <section>
                         <h2>Spread/rest operator</h2>
-                        <code class="js">...</code>
                     </section>
                     <section>
                         <h3><em>Spread</em> an iterable into its individual values</h3>
@@ -572,6 +571,45 @@
                     <section>
                         <h2>Symbols</h2>
                     </section>
+                    <section>
+                        <h3>Creation</h3>
+                        <p>Symbols introduce a new primitive type.</p>
+                        <pre><code data-trim class="js">
+                            let sym = Symbol('an optional description')
+                            console.log(typeof sym) // 'symbol'
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="1">Don't use the <code>new</code> keyword. <code>Symbol()</code> is not a constructor and doesn't create an object.</p>
+                        <pre class="fragment" data-fragment-index="1"><code data-trim class="js">
+                            sym = new Symbol() // ⚠️ TypeError
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="2">Symbols are always unique and their description can't be used to retrieve them.</p>
+                        <pre class="fragment" data-fragment-index="2"><code data-trim class="js">
+                            console.log(Symbol('yo') === Symbol('yo')) // false
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>The global symbol registry</h3>
+                        <pre><code data-trim data-noescape class="js">
+                            // create a globally available and retrievable symbol
+                            const GLOBAL_SYMBOL = Symbol.for('global symbol')
+                            <span class="fragment">
+                            // get its description
+                            const description = Symbol.keyFor(GLOBAL_SYMBOL)
+                            console.log(description) // 'global symbol'
+                            </span><span class="fragment">
+                            // retrieve the symbol again
+                            const GLOBAL_SYMBOL_2 = Symbol.for(description)
+                            console.log(GLOBAL_SYMBOL === GLOBAL_SYMBOL_2) // true
+                            </span>
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>More to come</h2>
+                    <ul class="fragment">
+                        <li>Iterators and iterables</li>
+                    </ul>
                 </section>
 
             </div>
