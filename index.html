@@ -40,6 +40,9 @@
                                 <a href="#/const-and-let"><code>const</code> and <code>let</code></a>
                             </li>
                             <li>
+                                <a href="#/for-of-loops"><code>for..of</code> loops</a>
+                            </li>
+                            <li>
                                 <a href="#/arrow-functions">Arrow functions</a>
                             </li>
                             <li>
@@ -146,6 +149,44 @@
                     <section>
                         <h3>But everyone seems to agree:</h3>
                         <p class="fragment">There's no reason to use <code>var</code> anymore 🙃</p>
+                    </section>
+                </section>
+
+                <section id="for-of-loops">
+                    <section>
+                        <h2><code>for..of</code> loops</h2>
+                    </section>
+                    <section>
+                        <h3>Iterate over values instead of indices</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <pre><code data-trim data-noescape class="js">
+                                    const a = ['a', 'b', 'c']
+
+                                    // with a for..in loop:
+                                    for (let i in a) {
+                                        console.log(i)
+                                    }
+                                    // 0
+                                    // 1
+                                    // 2
+                                </code></pre>
+                            </div>
+                            <div class="col fragment">
+                                <pre><code data-trim data-noescape class="js">
+                                    const a = ['a', 'b', 'c']
+
+                                    // with a for..of loop:
+                                    for (let val of a) {
+                                        console.log(val)
+                                    }
+                                    // 'a'
+                                    // 'b'
+                                    // 'c'
+                                </code></pre>
+                            </div>
+                        </div>
+                        <p class="fragment">Plain objects can't be iterated using <code>for..of</code> loops by default. For this an <code>iterator</code> is needed&hellip;</p>
                     </section>
                 </section>
 
