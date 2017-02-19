@@ -499,6 +499,73 @@
                     <section>
                         <h2>Object literal extensions</h2>
                     </section>
+                    <section>
+                        <h3>Concise properties</h3>
+                        <pre><code data-trim class="js">
+                            const x = 1
+                            const y = 2
+                            let obj
+
+                            obj = {
+                                x: x,
+                                y: y
+                            }
+
+                            // can be shortened to:
+                            obj = {
+                                x,
+                                y
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Concise methods</h3>
+                        <div class="cols">
+                            <div class="col">
+                                <pre><code data-trim data-noescape class="js">
+                                    const obj = {
+                                        x: function<span class="fragment" data-fragment-index="1"> x</span>() {
+                                            <span class="fragment" data-fragment-index="1">x() // works</span>
+                                        },
+
+                                        y: function () {
+
+                                        }
+                                    }
+                                </code></pre>
+                            </div>
+                            <div class="col">
+                                <pre><code data-trim data-noescape class="js">
+                                    const obj = {
+                                        x() {
+                                            <span class="fragment" data-fragment-index="1">x() // ⚠️ ReferenceError</span>
+                                        },
+
+                                        y() {
+
+                                        }
+                                    }
+                                </code></pre>
+                                <p class="fragment" data-fragment-index="1">Note that this makes it harder to use recursion.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Computed property names</h3>
+                        <p>It's now possible to have dynamically named properties:</p>
+                        <pre class="fragment"><code data-trim class="js">
+                            const prefix = 'dude'
+                            const obj = {
+                                // string property
+                                [`${prefix}_blah`]: 'blah',
+
+                                // (concise) method
+                                [`${prefix}_meh`]() {
+
+                                }
+                            }
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section id="symbols">
