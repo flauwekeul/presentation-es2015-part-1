@@ -85,15 +85,15 @@
                     </section>
                     <section>
                         <h3>Block scoped</h3>
-                        <pre><code data-trim class="js">
+                        <pre><code data-trim data-noescape class="js">
                             {
                                 const one = 1
                                 let two = 2
 
-                                console.log(one, two) // 1, 2
+                                <span class="fragment">console.log(one, two) // 1, 2</span>
                             }
 
-                            console.log(one, two) // ⚠️ ReferenceError
+                            <span class="fragment">console.log(one, two) // ⚠️ ReferenceError</span>
                         </code></pre>
                     </section>
                     <section>
@@ -101,39 +101,39 @@
                         <p>
                             It's not possible to access a <code>const</code> or <code>let</code> until after declaration.
                         </p>
-                        <pre class="fragment"><code data-trim class="js">
-                            console.log(a) // undefined
-                            console.log(b) // ⚠️ ReferenceError
+                        <pre class="fragment" data-fragment-index="1"><code data-trim data-noescape class="js">
+                            <span class="fragment" data-fragment-index="1">console.log(a) // undefined</span>
+                            <span class="fragment" data-fragment-index="2">console.log(b) // ⚠️ ReferenceError</span>
 
-                            var a = 1
-                            let b = 2
+                            <span class="fragment" data-fragment-index="1">var a = 1</span>
+                            <span class="fragment" data-fragment-index="2">let b = 2</span>
                         </code></pre>
                     </section>
                     <section>
                         <h3><code>let</code> or <code>const</code></h3>
                         <p>A <code>const</code> is read-only. Reassigning a value is not permitted.</p>
-                        <pre class="fragment"><code data-trim class="js">
+                        <pre class="fragment"><code data-trim data-noescape class="js">
                             const a = 1
                             console.log(a) // 1
 
-                            const a = 2 // ⚠️ TypeError
+                            <span class="fragment">const a = 2 // ⚠️ TypeError</span>
                         </code></pre>
                     </section>
                     <section>
                         <h3><code>const</code> does <em>not</em> mean immutable</h3>
-                        <pre class="fragment"><code data-trim class="js">
+                        <pre class="fragment"><code data-trim data-noescape class="js">
                             const a = [1, 2, 3]
                             a.push(4)
 
-                            console.log(a) // [1, 2, 3, 4]
+                            <span class="fragment">console.log(a) // [1, 2, 3, 4]</span>
                         </code></pre>
-                        <p class="fragment">If the value is complex (e.g. arrays, objects), their contents can be modified.</p>
+                        <p class="fragment">If the value is <em>complex</em> (e.g. arrays, objects), their contents can be modified.</p>
                     </section>
                     <section>
                         <h3><code>const</code>s must be initialized</h3>
                         <p class="fragment" data-fragment-index="1">When declaring a <code>const</code>:</p>
                         <pre class="fragment" data-fragment-index="1"><code data-trim data-noescape class="js">
-                            let a<span class="fragment" data-fragment-index="2"> // 👍🏼</span>
+                            let a<span class="fragment" data-fragment-index="2">   // 👍🏼</span>
                             const b<span class="fragment" data-fragment-index="2"> // ⚠️ SyntaxError</span>
                         </code></pre>
                         <p class="fragment" data-fragment-index="2">&hellip;it must be initialized too.</p>
@@ -172,29 +172,31 @@
                         <h3>Iterate over values instead of indices</h3>
                         <div class="cols">
                             <div class="col">
-                                <pre><code data-trim data-noescape class="js">
+                                <p class="fragment"><code>for..<strong>in</strong></code> loop:</p>
+                                <pre class="fragment"><code data-trim data-noescape class="js">
                                     const a = ['a', 'b', 'c']
-
-                                    // with a for..in loop:
+                                    <span class="fragment">
                                     for (let i in a) {
                                         console.log(i)
-                                    }
+                                    }</span>
+                                    <span class="fragment">
                                     // 0
                                     // 1
-                                    // 2
+                                    // 2</span>
                                 </code></pre>
                             </div>
-                            <div class="col fragment">
-                                <pre><code data-trim data-noescape class="js">
+                            <div class="col">
+                                <p class="fragment"><code>for..<strong>of</strong></code> loop:</p>
+                                <pre class="fragment"><code data-trim data-noescape class="js">
                                     const a = ['a', 'b', 'c']
-
-                                    // with a for..of loop:
+                                    <span class="fragment">
                                     for (let val of a) {
                                         console.log(val)
-                                    }
+                                    }</span>
+                                    <span class="fragment">
                                     // 'a'
                                     // 'b'
-                                    // 'c'
+                                    // 'c'</span>
                                 </code></pre>
                             </div>
                         </div>
@@ -213,12 +215,13 @@
                             const foo = function (x, y) {
                                 return x + y
                             }
-
+                            <span class="fragment">
                             // arrow function
                             const foo = (x, y) => x + y
+                            </span>
                         </code></pre>
-                        <p class="fragment" data-fragment-index="1">Arrow function declarations don't exist:</p>
-                        <pre class="fragment" data-fragment-index="1"><code data-trim data-noescape class="js">
+                        <p class="fragment">Arrow function declarations don't exist:</p>
+                        <pre class="fragment"><code data-trim data-noescape class="js">
                             // function <em>declaration</em>
                             function foo(x, y) {
                                 return x + y
@@ -236,7 +239,7 @@
                             // no arguments
                             ()<span class="diminish"> => 42</span>
 
-                            // 1 argument with optional ( )
+                            // 1 argument
                             a<span class="diminish"> => a + 1</span>
                             (a)<span class="diminish"> => a + 1</span>
 
@@ -260,62 +263,63 @@
                     </section>
                     <section>
                         <h3>Omiting the <code>{ }</code> implicitly returns</h3>
-                        <pre><code data-trim class="js">
-                            const multiply = (a, b) => a * b
-
-                            // calling the function returns its result:
-                            const result = multiply(3, 4)
-                            console.log(result) // 12
+                        <pre><code data-trim data-noescape class="js">
+                            const func  = function() { 'hi!' }
+                            const arrow = () => 'hi!'
+                            <span class="fragment">
+                            console.log(func())  // undefined
+                            console.log(arrow()) // 'hi!'
+                            </span>
                         </code></pre>
                     </section>
                     <section>
                         <h3><code>this</code> binding</h3>
                         <div class="cols">
                             <div class="col">
-                                <pre><code data-trim class="js">
-                                    function Thing() {
-                                        this.counter = 0
-
-                                        // regular function
-                                        setInterval(function() {
-                                            this.counter++
-                                        }, 1000)
+                                <p class="fragment">
+                                    With regular functions <code>this</code> is determined by <em>how</em> the function is called.
+                                </p>
+                                <pre class="fragment"><code data-trim data-noescape class="js">
+                                    const funcThis = function() {
+                                        console.log(this)
                                     }
-
-                                    const thing = new Thing()
-
-                                    // wait a few seconds
-                                    console.log(thing.counter) // 0
+                                    <span class="fragment">
+                                    funcThis()     // Window {&hellip;}
+                                    </span><span class="fragment">
+                                    const obj = {
+                                        objThis: funcThis
+                                    }
+                                    obj.objThis()  // Object {}
+                                    </span>
+                                    <span class="fragment">new funcThis() // funcThis {}</span>
                                 </code></pre>
                             </div>
-                            <div class="col fragment">
-                                <pre><code data-trim class="js">
-                                    function Thing() {
-                                        this.counter = 0
-
-                                        // arrow function
-                                        setInterval(() => {
-                                            this.counter++
-                                        }, 1000)
+                            <div class="col">
+                                <p class="fragment">
+                                    With arrow functions <code>this</code> is determined <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping">lexically</a>. It's looked up in the scope.
+                                </p>
+                                <pre class="fragment"><code data-trim data-noescape class="js">
+                                    const arrowThis = () => {
+                                        console.log(this)
                                     }
-
-                                    const thing = new Thing()
-
-                                    // wait a few seconds
-                                    console.log(thing.counter) // 3
+                                    <span class="fragment">
+                                    arrowThis()     // Window {&hellip;}
+                                    </span><span class="fragment">
+                                    const obj = {
+                                        objThis: arrowThis
+                                    }
+                                    obj.objThis()   // Window {&hellip;}
+                                    </span>
+                                    <span class="fragment">new arrowThis() // ⚠️ TypeError</span>
                                 </code></pre>
                             </div>
                         </div>
-                        <p class="fragment">
-                            Arrow functions don't create a new <code>this</code> binding.
-                            The binding of <code>this</code> is not dynamic, but <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping">lexical</a>.
-                        </p>
                     </section>
                     <section>
                         <h3><code>this</code> binding caveat</h3>
                         <div class="cols">
                             <div class="col">
-                                <pre><code data-trim class="js">
+                                <pre><code data-trim data-noescape class="js">
                                     // using regular functions
                                     const someObject = {
                                         aMethod: function() {
@@ -326,13 +330,14 @@
                                             console.log('w00p')
                                         }
                                     }
-
+                                    <span class="fragment">
                                     someObject.aMethod()
                                     // 'w00p'
+                                    </span>
                                 </code></pre>
                             </div>
                             <div class="col fragment">
-                                <pre><code data-trim class="js">
+                                <pre><code data-trim data-noescape class="js">
                                     // using arrow functions
                                     const someObject = {
                                         aMethod: () => {
@@ -343,12 +348,13 @@
                                             console.log('w00p')
                                         }
                                     }
-
+                                    <span class="fragment">
                                     someObject.aMethod()
                                     // ⚠️ TypeError
+                                    </span>
                                 </code></pre>
                                 <p class="fragment">
-                                    Here, <code>this</code> is lexically bound and points to the global scope.
+                                    Here, <code>this</code> points to the global scope, which doesn't have <code>aMethod</code>.
                                 </p>
                             </div>
                         </div>
@@ -389,12 +395,12 @@
                                 b: 2,
                                 c: 3
                             }
-                            let { a: a, b: b, c: c } = anObject
-                                <span class="fragment" data-fragment-index="2">{ a, b, c } = anObject</span>
+                            <span class="fragment current-visible" data-fragment-index="1">let { a: a, b: b, c: c } = anObject</span>
+                            <span class="fragment" data-fragment-index="2">let { a, b, c } = anObject</span>
 
-                            console.log(a, b, c) // 1, 2, 3
+                            <span class="fragment" data-fragment-index="1">console.log(a, b, c) // 1, 2, 3</span>
                         </code></pre>
-                        <p class="fragment" data-fragment-index="1">When the property key has the same name as the variable that's assigned, the key can be left off.</p>
+                        <p class="fragment" data-fragment-index="2">When the property key has the same name as the variable that's assigned, the key can be left off.</p>
                     </section>
                     <section>
                         <h3>Object destructuring direction</h3>
@@ -416,29 +422,41 @@
                     </section>
                     <section>
                         <h3>More examples</h3>
-                        <pre><code data-trim class="js">
+                        <pre><code data-trim data-noescape class="js">
                             // assign values to things other than variables
                             const o = {}
                             [o.a, o.b, o.c] = [1, 2, 3]
-
+                            <span class="fragment">
                             // repeated and nested assignment
-                            const { a: { x: X, x: Y }, a } = { a: { x: 1 } }
-                            console.log(X, Y, a) // 1, 1, { x: 1 }
-
+                            const { x: { y: a, y: b }, x } = { x: { y: 1 } }
+                            console.log(a, b, x) // 1, 1, { y: 1 }
+                            </span><span class="fragment">
                             // skipped and ignored assignment
-                            const [ , , b] = [1, 2, 3]
-                            const { c, z: d, e } = { c: 4, d: 5 }
-                            console.log(b, c, d, e) // 3, 4, undefined, undefined
+                            const [ , , c] = [1, 2, 3]
+                            const { d, f } = { d: 4, e: 5 }
+                            console.log(c, d, f) // 3, 4, undefined
+                            </span>
                         </code></pre>
                     </section>
                     <section>
                         <h3>Default value assignment</h3>
-                        <pre><code data-trim class="js">
-                            // destructuring accepts defaults
-                            const { a = 1, b = 2, x: c = 3 } = { b: 4, x: 8 }
-                            console.log(a, b, c) // 1, 4, 8
+                        <pre><code data-trim data-noescape class="js">
+                            const obj = {
+                                b: 4,
+                                x: 8
+                            }
+                            const { a = 1, b = 2, x: c = 3 } = obj
+                            console.log(a, b, c)<span class="fragment" data-fragment-index="1"> // 1, </span><span class="fragment" data-fragment-index="2">4, </span><span class="fragment" data-fragment-index="3">8</span>
                         </code></pre>
+                        <ul>
+                            <li class="fragment" data-fragment-index="1"><code>a</code> is not defined in <code>obj</code>, so the default <code>1</code> is assigned.</li>
+                            <li class="fragment" data-fragment-index="2"><code>b</code> is defined in <code>obj</code>, so <code>4</code> is assigned.</li>
+                            <li class="fragment" data-fragment-index="3">The value of <code>x</code> is assigned to <code>c</code>, <code>x</code> is defined in <code>obj</code>, so <code>8</code> is assigned.</li>
+                        </ul>
                     </section>
+                    <ul>
+                        <li class="fragment"><code>a</code> isn't defined in <code>obj</code></li>
+                    </ul>
                 </section>
 
                 <section id="spread-rest-operator">
@@ -447,31 +465,31 @@
                     </section>
                     <section>
                         <h3><em>Spread</em> an iterable into its individual values</h3>
-                        <pre><code data-trim class="js">
+                        <pre><code data-trim data-noescape class="js">
                             function threeArgs(a, b, c) {
                                 console.log(a, b, c)
                             }
 
-                            threeArgs([1, 2, 3]) // [1, 2, 3], undefined, undefined
-                            threeArgs(...[1, 2, 3]) // 1, 2, 3
+                            <span class="fragment">threeArgs([1, 2, 3]) // [1, 2, 3], undefined, undefined</span>
+                            <span class="fragment">threeArgs(...[1, 2, 3]) // 1, 2, 3</span>
                         </code></pre>
-                        <pre class="fragment"><code data-trim class="js">
+                        <pre class="fragment"><code data-trim data-noescape class="js">
                             // spread values from one array into another array
                             const a = [2, 3, 4]
                             const b = [1, ...a, 5]
-                            console.log(b) // [1, 2, 3, 4, 5]
+                            <span class="fragment">console.log(b) // [1, 2, 3, 4, 5]</span>
                         </code></pre>
                     </section>
                     <section>
                         <h3>Or gather the <em>rest</em> of any arguments</h3>
-                        <pre><code data-trim class="js">
+                        <pre><code data-trim data-noescape class="js">
                             function threeArgs(a, b, ...theRest) {
                                 console.log(a, b, theRest)
                             }
 
-                            threeArgs(1, 2, 3, 4, 5) // 1, 2, [3, 4, 5]
+                            <span class="fragment" data-fragment-index="1">threeArgs(1, 2, 3, 4, 5) // 1, 2, [3, 4, 5]</span>
                         </code></pre>
-                        <p>&hellip;into an array.</p>
+                        <p class="fragment" data-fragment-index="1">&hellip;into an array.</p>
                     </section>
                 </section>
 
@@ -480,28 +498,27 @@
                         <h2>Default function parameters</h2>
                     </section>
                     <section>
-                        <h3>An elaborate example</h3>
+                        <h3>An extensive example</h3>
                         <pre><code data-trim data-noescape class="js">
                             function add(a = 1, b = 2) {
                                 console.log(a + b)
                             }
-                            <span class="fragment">
-                            add()               // 3
-                            add(4, 8)           // 12
-                            add(0, 4)           // 4
-                            </span><span class="fragment">
-                            add(16)             // 18
-                            add(16, undefined)  // 18
-                            add(16, null)       // 16 (null is coerced to 0)
-                            add('de', 'rp')     // 'derp'
-                            </span>
+
+                            <span class="fragment">add()                     // 3</span>
+                            <span class="fragment">add(4, 8)                 // 12</span>
+                            <span class="fragment">add(0, 0)                 // 0</span>
+                            <span class="fragment">add(null, null)           // 0</span>
+                            <span class="fragment">add(undefined, undefined) // 3</span>
                         </code></pre>
-                        <p class="fragment">Only <code>undefined</code> means a value is "missing".</p>
+                        <p class="fragment">Only <code>undefined</code> "triggers" the default assignment.</p>
                     </section>
                     <section>
-                        <h3>Destructured default function object parameters 😳</h3>
+                        <h3>Default function parameters &amp; object destructuring</h3>
                         <pre class="fragment"><code data-trim data-noescape class="js">
-                            function hasDefaultOptions({ x = 1 } = {}, { y } = { y: 2 }) {
+                            function hasDefaultOptions(
+                                { x = 1 } = {},
+                                { y }     = { y: 2 }
+                            ) {
                                 console.log(x, y)
                             }
 
@@ -553,68 +570,39 @@
                     </section>
                     <section>
                         <h3>Concise properties</h3>
-                        <pre><code data-trim class="js">
+                        <pre><code data-trim data-noescape class="js">
                             const x = 1
-                            const y = 2
                             let obj
 
                             obj = {
                                 x: x,
-                                y: y
+                                y: function() { }
                             }
-
+                            <span class="fragment">
                             // can be shortened to:
                             obj = {
-                                x,
-                                y
-                            }
+                                x,      <span class="fragment">// key and variable name are the same</span>
+                                y() { } <span class="fragment">// function keyword isn't necessary</span>
+                            }</span>
                         </code></pre>
-                    </section>
-                    <section>
-                        <h3>Concise methods</h3>
-                        <div class="cols">
-                            <div class="col">
-                                <pre><code data-trim data-noescape class="js">
-                                    const obj = {
-                                        x: function<span class="fragment" data-fragment-index="1"> x</span>() {
-                                            <span class="fragment" data-fragment-index="1">x() // works</span>
-                                        },
-
-                                        y: function () {
-
-                                        }
-                                    }
-                                </code></pre>
-                            </div>
-                            <div class="col">
-                                <pre><code data-trim data-noescape class="js">
-                                    const obj = {
-                                        x() {
-                                            <span class="fragment" data-fragment-index="1">x() // ⚠️ ReferenceError</span>
-                                        },
-
-                                        y() {
-
-                                        }
-                                    }
-                                </code></pre>
-                                <p class="fragment" data-fragment-index="1">Note that this makes it harder to use recursion.</p>
-                            </div>
-                        </div>
                     </section>
                     <section>
                         <h3>Computed property names</h3>
                         <p>It's now possible to have dynamically named properties:</p>
-                        <pre class="fragment"><code data-trim class="js">
+                        <pre class="fragment" data-fragment-index="1"><code data-trim class="js">
+                            const obj = {
+                                ['dynamic']: 'value'
+                            }
+                        </code></pre>
+                        <p class="fragment" data-fragment-index="2">Better example:</p>
+                        <pre class="fragment" data-fragment-index="2"><code data-trim class="js">
                             const prefix = 'dude'
                             const obj = {
                                 // string property
                                 [`${prefix}_blah`]: 'blah',
 
                                 // (concise) method
-                                [`${prefix}_meh`]() {
-
-                                }
+                                [`${prefix}_meh`]() { }
                             }
                         </code></pre>
                     </section>
@@ -656,19 +644,6 @@
                             </span>
                         </code></pre>
                     </section>
-                </section>
-
-                <section>
-                    <h2>In part 2</h2>
-                    <ol class="fragment">
-                        <li>Iterators and iterables</li>
-                        <li>Generators</li>
-                        <li>Modules</li>
-                        <li>"Classes"</li>
-                        <li><code>Map</code>s and <code>Set</code>s</li>
-                        <li>API additions</li>
-                        <li>Proxies and the <code>Reflect</code> API</li>
-                    </ol>
                 </section>
 
                 <section>
